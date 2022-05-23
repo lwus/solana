@@ -37,6 +37,8 @@ mod access_token;
 mod bigtable;
 mod compression;
 mod root_ca_certificate;
+mod tonic_proxy;
+mod tonic_tunnel;
 
 #[derive(Debug, Error)]
 pub enum Error {
