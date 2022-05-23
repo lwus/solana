@@ -177,9 +177,25 @@ impl BigTableConnection {
                     }
                 };
 
+                let http = hyper::client::HttpConnector::new();
+                let channel = match std::env::var("BT_PROXY") {
+                    Ok(proxy_uri) => {
+                        let proxy = hyper_proxy::Proxy::new(
+                            hyper_proxy::Intercept::All,
+                            proxy_uri.parse::<http::Uri>()
+                                .map_err(|err| Error::InvalidUri(proxy_uri, err.to_string()))?,
+                        );
+                        endpoint.connect_with_connector(
+                            crate::tonic_proxy::TonicProxyConnector::from_proxy(http, proxy)?).await?
+                    }
+                    _ => {
+                        endpoint.connect_with_connector_lazy(http)
+                    }
+                };
+
                 Ok(Self {
                     access_token: Some(access_token),
-                    channel: endpoint.connect_lazy(),
+                    channel,
                     table_prefix,
                     timeout,
                 })
