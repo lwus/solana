@@ -27,10 +27,14 @@ prost-types = "0.10.0"
 serde = "1.0.136"
 serde_derive = "1.0.103"
 smpl_jwt = "0.6.1"
-solana-metrics = { path = "../metrics", version = "=1.10.9" }
-solana-sdk = { path = "../sdk", version = "=1.10.9" }
-solana-storage-proto = { path = "../storage-proto", version = "=1.10.9" }
-solana-transaction-status = { path = "../transaction-status", version = "=1.10.9" }
+# solana-metrics = { path = "../metrics", version = "=1.10.9" }
+# solana-sdk = { path = "../sdk", version = "=1.10.9" }
+# solana-storage-proto = { path = "../storage-proto", version = "=1.10.9" }
+# solana-transaction-status = { path = "../transaction-status", version = "=1.10.9" }
+solana-metrics = "=1.10.9"
+solana-sdk = "=1.10.9"
+solana-storage-proto = "=1.10.9"
+solana-transaction-status = "=1.10.9"
 thiserror = "1.0"
 tokio = "~1.15"
 tonic = { version = "0.7.1", features = ["tls", "transport"] }
